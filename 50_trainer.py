@@ -73,8 +73,10 @@ if __name__ == '__main__':
                 optimizer.step()
                 if index % 100 == 0:
                     inputs = Variable(torch.from_numpy(
-                        testData[:7000])).float().cuda()
+                        testData)).float()
+                    model.to('cpu')
                     loss = myLoss(inputs, model(inputs))
                     print(math.sqrt(loss.data.cpu().numpy()))
                     del inputs
+                    model.to('cuda')
         torch.save(model.state_dict(), f'conv_autoencoder_{epoch:04d}.pth')

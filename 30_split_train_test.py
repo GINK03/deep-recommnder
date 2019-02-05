@@ -9,12 +9,12 @@ trainIds = set(userId for userId in userIds if userId not in testIds)
 
 
 for index, chunk_test_ids in enumerate(np.array_split(list(testIds), 10)):
-		chunks = set(chunk_test_ids.tolist())
-		df[df['userId'].apply(lambda x:x in chunks)].to_csv(
-				f'works/dataset/test_{index:03d}.csv', index=None)
+    chunks = set(chunk_test_ids.tolist())
+    df[df['userId'].apply(lambda x:x in chunks)].to_csv(
+        f'works/dataset/test_{index:03d}.csv', index=None)
 
 for index, chunk_train_ids in enumerate(np.array_split(list(trainIds), 10)):
-		print('make trian dataset', index)
-		chunks = set(chunk_train_ids.tolist())
-		df[df['userId'].apply(lambda x:x in chunks)].to_csv(
-				f'works/dataset/train_{index:03d}.csv', index=None)
+    print('make trian dataset', index)
+    chunks = set(chunk_train_ids.tolist())
+    df[df['userId'].apply(lambda x:x in chunks)].to_csv(
+        f'works/dataset/train_{index:03d}.csv', index=None)
